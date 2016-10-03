@@ -6455,14 +6455,27 @@ bool ImGui::SliderBehavior(const ImRect& frame_bb, ImGuiID id, float* v, float v
     else
     {
         // Linear slider
-        grab_t = (ImClamp(*v, v_min, v_max) - v_min) / (v_max - v_min);
-    }
+		if ((v_max - v_min) > 0.0f) {
+			grab_t = (ImClamp(*v, v_min, v_max) - v_min) / (v_max - v_min);
+		}
+		else {
+			grab_t = (ImClamp(*v, v_max, v_min) - v_max) / (v_min - v_max);
+		}
+	}
 
     // Draw
     if (!is_horizontal)
         grab_t = 1.0f - grab_t;
-    const float grab_pos = ImLerp(slider_usable_pos_min, slider_usable_pos_max, grab_t);
-    ImRect grab_bb;
+
+	float grab_pos;
+	if ((v_max - v_min) > 0.0f) {
+		grab_pos = ImLerp(slider_usable_pos_min, slider_usable_pos_max, grab_t);
+	}
+	else {
+		grab_pos = ImLerp(slider_usable_pos_max, slider_usable_pos_min, grab_t);
+	}
+		
+	ImRect grab_bb;
     if (is_horizontal)
         grab_bb = ImRect(ImVec2(grab_pos - grab_sz*0.5f, frame_bb.Min.y + grab_padding), ImVec2(grab_pos + grab_sz*0.5f, frame_bb.Max.y - grab_padding));
     else
