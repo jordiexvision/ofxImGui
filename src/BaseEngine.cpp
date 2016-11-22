@@ -76,7 +76,7 @@ namespace ofxImGui
 	}
 
 	//--------------------------------------------------------------
-	GLuint BaseEngine::loadTextureImage2D(unsigned char * pixels, int width, int height)
+	GLuint BaseEngine::loadTextureImage2D(unsigned char * pixels, int width, int height, int mode)
 	{
 		GLint last_texture;
 		glGetIntegerv(GL_TEXTURE_BINDING_2D, &last_texture);
@@ -89,10 +89,10 @@ namespace ofxImGui
 		glTexImage2D(
 			GL_TEXTURE_2D,
 			0,
-			GL_RGBA,
+			mode,
 			width, height,
 			0,
-			GL_RGBA,
+			mode,
 			GL_UNSIGNED_BYTE,
 			pixels
 		);
