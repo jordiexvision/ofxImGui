@@ -29,7 +29,7 @@ namespace ofxImGui
 		virtual void onKeyReleased(ofKeyEventArgs& event) = 0;
 		virtual void onWindowResized(ofResizeEventArgs& window);
 
-		GLuint loadTextureImage2D(unsigned char * pixels, int width, int height, int mode);
+		GLuint loadTextureImage2D(unsigned char * pixels, int width, int height, int format);
 
 		static const char* getClipboardString();
 		static void setClipboardString(const char * text);

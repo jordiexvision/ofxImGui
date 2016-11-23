@@ -38,5 +38,7 @@ namespace ofxImGui
 		GLuint loadTexture(ofTexture& texture, string imagePath);
 
 		vector<ofTexture*> loadedTextures;
+
+		vector<GLuint> loadedTextureIDs;
 	};
 }

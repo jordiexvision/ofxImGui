@@ -64,7 +64,20 @@ namespace ofxImGui
 	//--------------------------------------------------------------
 	GLuint Gui::loadPixels(ofPixels& pixels)
 	{
-		return engine->loadTextureImage2D(pixels.getData(), pixels.getWidth(), pixels.getHeight(), pixels.getBytesPerPixel() == 4 ? GL_RGBA : GL_RGB);
+
+		//cout << "//////"<< endl;
+		//cout << pixels.getBytesPerPixel() << endl;
+		//cout << pixels.getPixelFormat() << endl;
+		//cout << pixels.getImageType() << endl;
+		//cout << "//////" << endl;
+		//cout << ofGetGlInternalFormatName(ofGetGlInternalFormat(pixels)) << endl;
+		//cout << ofGetGlInternalFormatName(ofGetGlFormat(pixels)) << endl;
+
+		loadedTextureIDs.push_back(engine->loadTextureImage2D(pixels.getData(), pixels.getWidth(), pixels.getHeight(), ofGetGlFormat(pixels)));
+
+		return loadedTextureIDs.back();
+//		return engine->loadTextureImage2D(pixels.getData(), pixels.getWidth(), pixels.getHeight(), ofGetGlFormat(pixels));
+//		return engine->loadTextureImage2D(pixels.getData(), pixels.getWidth(), pixels.getHeight(), pixels.getBytesPerPixel() == 4 ? GL_RGBA : GL_RGB);
 	}
 
 	//--------------------------------------------------------------
@@ -153,6 +166,10 @@ namespace ofxImGui
 	void Gui::end()
 	{
 		ImGui::Render();
+		for (size_t i = 0; i < loadedTextureIDs.size(); i++)
+		{
+			glDeleteTextures(1, &loadedTextureIDs[i]);
+		}
 	}
 
 	//--------------------------------------------------------------
