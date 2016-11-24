@@ -64,7 +64,9 @@ namespace ofxImGui
 	//--------------------------------------------------------------
 	GLuint Gui::loadPixels(ofPixels& pixels)
 	{
-
+		//cout << "//////" << endl;
+		//cout << pixels.getWidth() << endl;
+		//cout << pixels.getHeight() << endl;
 		//cout << "//////"<< endl;
 		//cout << pixels.getBytesPerPixel() << endl;
 		//cout << pixels.getPixelFormat() << endl;
@@ -76,8 +78,6 @@ namespace ofxImGui
 		loadedTextureIDs.push_back(engine->loadTextureImage2D(pixels.getData(), pixels.getWidth(), pixels.getHeight(), ofGetGlFormat(pixels)));
 
 		return loadedTextureIDs.back();
-//		return engine->loadTextureImage2D(pixels.getData(), pixels.getWidth(), pixels.getHeight(), ofGetGlFormat(pixels));
-//		return engine->loadTextureImage2D(pixels.getData(), pixels.getWidth(), pixels.getHeight(), pixels.getBytesPerPixel() == 4 ? GL_RGBA : GL_RGB);
 	}
 
 	//--------------------------------------------------------------
